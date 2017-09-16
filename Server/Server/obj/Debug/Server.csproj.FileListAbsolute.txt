@@ -1,0 +1,3 @@
+F:\testProject\Server\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+F:\testProject\Server\Server\obj\Debug\Server.Properties.Resources.resources
+F:\testProject\Server\Server\obj\Debug\Server.csproj.GenerateResource.Cache
