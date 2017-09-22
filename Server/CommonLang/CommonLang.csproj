@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7AD773D3-7B6B-42ED-9EF2-F3EEA3D44669}</ProjectGuid>
+    <ProjectGuid>{431ECE2E-0C2C-4D79-ACB1-D033A3D825FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonClient</RootNamespace>
-    <AssemblyName>CommonClient</AssemblyName>
+    <RootNamespace>CommonLang</RootNamespace>
+    <AssemblyName>CommonLang</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,16 +38,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientManager.cs" />
-    <Compile Include="ClientSocket.cs" />
-    <Compile Include="ClientMessagePool.cs" />
+    <Compile Include="IO.Attribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{c99df303-fb36-4c23-89ee-a0db6b7bc376}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

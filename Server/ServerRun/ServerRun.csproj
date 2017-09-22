@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7AD773D3-7B6B-42ED-9EF2-F3EEA3D44669}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F222BAEE-F68B-4587-A250-FF904A3D99B3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonClient</RootNamespace>
-    <AssemblyName>CommonClient</AssemblyName>
+    <RootNamespace>ServerRun</RootNamespace>
+    <AssemblyName>ServerRun</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,12 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientManager.cs" />
-    <Compile Include="ClientSocket.cs" />
-    <Compile Include="ClientMessagePool.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonClient\CommonClient.csproj">
+      <Project>{7ad773d3-7b6b-42ed-9ef2-f3eea3d44669}</Project>
+      <Name>CommonClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonLang\CommonLang.csproj">
+      <Project>{431ece2e-0c2c-4d79-acb1-d033a3d825fa}</Project>
+      <Name>CommonLang</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonServer\CommonServer.csproj">
+      <Project>{949e3293-79cc-46cb-b1e7-a09ad079f8e2}</Project>
+      <Name>CommonServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonUnit\CommonUnit.csproj">
+      <Project>{0c38f345-e395-4205-bd3f-7e195cdf4479}</Project>
+      <Name>CommonUnit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c99df303-fb36-4c23-89ee-a0db6b7bc376}</Project>
       <Name>Common</Name>

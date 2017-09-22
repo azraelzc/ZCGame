@@ -3,9 +3,10 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using System.IO;
-using Azrael.Common;
+using Common;
+using System.Collections.Generic;
 
-namespace Azrael.CommonServer
+namespace CommonServer
 {
     public class ServerSocket
     {
@@ -13,6 +14,8 @@ namespace Azrael.CommonServer
         private const int port = 8088;
         private static string IpStr = "127.0.0.1";
         private static Socket serverSocket;
+
+        private const int mUpdateInterval = 33;
         public void init()
         {
             IPAddress ip = IPAddress.Parse(IpStr);
@@ -23,6 +26,10 @@ namespace Azrael.CommonServer
             Console.WriteLine("启动监听{0}成功", serverSocket.LocalEndPoint.ToString());
             Thread thread = new Thread(ClientConnectListen);
             thread.Start();
+            ServerManager.Instance.OnSendEvent += SendMessage;
+            Timer timer = new Timer((obj) => {
+                Update();
+            }, null, mUpdateInterval, mUpdateInterval);
             Console.ReadLine();
         }
 
@@ -35,9 +42,10 @@ namespace Azrael.CommonServer
             {
                 //为新的客户端连接创建一个Socket对象  
                 Socket clientSocket = serverSocket.Accept();
-                Console.WriteLine("客户端{0}成功连接", clientSocket.RemoteEndPoint.ToString());
+                Console.WriteLine("客户端{0} ,{1}成功连接", clientSocket.RemoteEndPoint.ToString(), clientSocket.RemoteEndPoint.GetHashCode());
+                ServerManager.Instance.AddClient(clientSocket);
                 //向连接的客户端发送连接成功的数据  
-                SendMessage(clientSocket,CommonNet.NetState.CONNECTED);
+                ServerManager.Instance.C2B(clientSocket.GetHashCode(),CommonNet.NetState.CONNECTED);
                 //每个客户端连接创建一个线程来接受该客户端发送的消息  
                 Thread thread = new Thread(RecieveMessage);
                 thread.Start(clientSocket);
@@ -46,9 +54,10 @@ namespace Azrael.CommonServer
 
         public void SendMessage(Socket clientSocket,object obj)
         {
-            ByteBuffer buffer = new ByteBuffer();
-            buffer.WriteString(obj.ToString());
-            clientSocket.Send(WriteMessage(buffer.ToBytes()));
+            //ByteBuffer buffer = new ByteBuffer();
+            //buffer.WriteString(obj.ToString());
+            //clientSocket.Send(WriteMessage(buffer.ToBytes()));
+            clientSocket.Send(ByteToObject.Object2Bytes(obj));
         }
 
         /// <summary>  
@@ -83,24 +92,38 @@ namespace Azrael.CommonServer
                 try
                 {
                     int receiveNumber = mClientSocket.Receive(result);
-                    Console.WriteLine("接收客户端{0}消息， 长度为{1}", mClientSocket.RemoteEndPoint.ToString(), receiveNumber);
-                    ByteBuffer buff = new ByteBuffer(result);
-                    //数据长度  
-                    int len = buff.ReadShort();
-                    //数据内容  
-                    string data = buff.ReadString();
-
-                    ServerManager.Instance.B2C(data);
-                    Console.WriteLine("数据内容：{0}", data);
+                    //Console.WriteLine("接收客户端{0},{1}消息， 长度为{2}", mClientSocket.RemoteEndPoint.ToString(), mClientSocket.GetHashCode(), receiveNumber);
+                    //ByteBuffer buff = new ByteBuffer(result);
+                    ////数据长度  
+                    //int len = buff.ReadShort();
+                    ////数据内容  
+                    //string data = buff.ReadString();
+                    
+                    ServerManager.Instance.B2C(mClientSocket.GetHashCode(),ByteToObject.Bytes2Object(result));
+                    //Console.WriteLine("数据内容：{0}", data);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    mClientSocket.Shutdown(SocketShutdown.Both);
-                    mClientSocket.Close();
+                    ShutDownClient(mClientSocket);
                     break;
                 }
             }
+        }
+
+        //断开客户端连接
+        private void ShutDownClient(Socket mClientSocket)
+        {
+            Console.WriteLine("客户端{0} ,{1}断开连接", mClientSocket.RemoteEndPoint.ToString(), mClientSocket.RemoteEndPoint.GetHashCode());
+            mClientSocket.Shutdown(SocketShutdown.Both);
+            mClientSocket.Close();
+            ServerManager.Instance.RemoveClient(mClientSocket);
+        }
+
+        //帧同步更新协议
+        public void Update()
+        {
+            ServerManager.Instance.Update(mUpdateInterval);
         }
     }
 

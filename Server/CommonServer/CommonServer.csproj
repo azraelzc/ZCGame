@@ -38,10 +38,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServerMessagePool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerManager.cs" />
     <Compile Include="ServerSocket.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonUnit\CommonUnit.csproj">
+      <Project>{0c38f345-e395-4205-bd3f-7e195cdf4479}</Project>
+      <Name>CommonUnit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c99df303-fb36-4c23-89ee-a0db6b7bc376}</Project>
       <Name>Common</Name>

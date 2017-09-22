@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Azrael.Common;
+using Common;
+using System.Net.Sockets;
+using CommonUnit;
 
-namespace Azrael.CommonServer
+namespace CommonServer
 {
-    class ServerManager
+    public class ServerManager
     {
+        public delegate void SendEvent(Socket client, object obj);
+        private SendEvent mSendEvent;
+        public event SendEvent OnSendEvent { add { mSendEvent += value; } remove { mSendEvent -= value; } }
         private static ServerManager mInstance = null;
         private ServerSocket socket = null;
-        private MessagePool pool = null;
+        private ServerMessagePool pool = null;
         public static ServerManager Instance
         {
             get
@@ -18,55 +23,89 @@ namespace Azrael.CommonServer
                 if (mInstance == null)
                 {
                     mInstance = new ServerManager();
-                    mInstance.Init();
                 }
                 return mInstance;
             }
         }
         public void Init()
         {
+            pool = new ServerMessagePool();
             socket = new ServerSocket();
-            pool = new MessagePool();
+            socket.init();
         }
 
-        public void C2B(uint id,string msg)
+        public bool AddClient(Socket client)
         {
-            pool.PutSendMessageInPool(id,msg);
+            return pool.AddClient(client);
         }
 
-        public void B2C(uint id, string msg)
+        public bool RemoveClient(Socket client)
         {
-            pool.PutReciveMessageInPool(id, msg);
+            return pool.RemoveClient(client);
         }
 
-        private void PushMessage()
+        public void C2B(int clientCode,object obj)
         {
-            Dictionary<uint, Queue<string>> map = pool.GetSendMap;
-            List<uint> keys = new List<uint>(map.Keys);
-            foreach (uint key in keys)
+            pool.PutSendMessageInPool(clientCode,obj);
+        }
+
+        public void B2C(int clientCode, object obj)
+        {
+            pool.PutReciveMessageInPool(clientCode,obj);
+        }
+
+        public void Update(int delta)
+        {
+            while (true)
             {
-                
+                ServerClass c = pool.HasSendMessages();
+                if (c == null)
+                {
+                    break;
+                }
+                Queue<object> messages = c.messages;
+                Socket client = pool.GetClientById(c.id);
+                if (client != null)
+                {
+                    while(messages.Count > 0)
+                    { 
+                        mSendEvent.Invoke(client, messages.Dequeue());
+                    }
+                }           
             }
 
-            map = pool.GetSendMap;
-            keys = new List<uint>(map.Keys);
-            foreach (uint key in keys)
+            while (true)
             {
-                Queue<string> q = map[key];
-                if (q.Count > 0)
+                ServerClass c = pool.HasReciveMessages();
+                if (c == null)
                 {
-                    while (q.Count > 0)
+                    break;
+                }
+                Queue<object> messages = c.messages;
+                Socket client = pool.GetClientById(c.id);
+                if (client != null)
+                {
+                    while (messages.Count > 0)
                     {
-                        socket.SendMessage(q.Dequeue());
+                        OnEvent(messages.Dequeue());
                     }
                 }
-                
             }
         }
 
-        public void Update()
+        public void OnEvent(object obj)
         {
-
+            Console.WriteLine("======OnEvent======{0}", obj);
+            if (obj is Player)
+            {
+                Player p = obj as Player;
+                Console.WriteLine("======OnEvent======{0}", p.ToString());
+            }
+            else if (obj is BuffEvent)
+            {
+                BuffEvent buff = obj as BuffEvent;
+                Console.WriteLine("======OnEvent======{0}", buff.ToString());
+            }
         }
     }
 }
