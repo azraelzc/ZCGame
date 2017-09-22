@@ -1,0 +1,7 @@
+*.dll
+*.pdb
+obj
+bin
+Client/Library
+Client/Temp
+Client/.vs
