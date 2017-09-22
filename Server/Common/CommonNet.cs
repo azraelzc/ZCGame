@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Azrael.Common
+namespace Common
 {
     public class CommonNet
     {

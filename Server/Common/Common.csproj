@@ -39,9 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteBuffer.cs" />
+    <Compile Include="ByteToObject.cs" />
     <Compile Include="CommonNet.cs" />
-    <Compile Include="MessagePool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializableConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

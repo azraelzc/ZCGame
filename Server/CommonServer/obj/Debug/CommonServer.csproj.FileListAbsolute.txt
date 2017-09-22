@@ -1,1 +1,0 @@
-F:\testProject\Server\CommonServer\obj\Debug\CommonServer.csprojResolveAssemblyReference.cache
