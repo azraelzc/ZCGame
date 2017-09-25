@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,27 @@ namespace CommonServer
         private Dictionary<int, Queue<object>> sendMessPool = new Dictionary<int, Queue<object>>();
         private Dictionary<int, Queue<object>> reciveMessPool = new Dictionary<int, Queue<object>>();
         private Dictionary<int, Socket> connectClients = new Dictionary<int, Socket>();
+        private Dictionary<int, int> pingList = new Dictionary<int, int>();//心跳包
+        public Dictionary<int, int> GetPingList
+        {
+            get
+            {
+                return pingList;
+            }
+        }
 
         public bool AddClient(Socket client)
         {
-            Console.WriteLine("=======AddClient======{0}", client.GetHashCode());
+            Console.WriteLine("===========AddClient{0}===========", client.GetHashCode());
             bool flag = false;
             if (!connectClients.ContainsKey(client.GetHashCode()))
             {
                 connectClients.Add(client.GetHashCode(), client);
                 flag = true;
+            }
+            if (!pingList.ContainsKey(client.GetHashCode()))
+            {
+                pingList.Add(client.GetHashCode(), 0);
             }
             if (!sendMessPool.ContainsKey(client.GetHashCode()))
             {
@@ -37,31 +50,43 @@ namespace CommonServer
             return flag; 
         }
 
-        public bool RemoveClient(Socket client)
+        public bool RemoveClient(int id)
         {
-            Console.WriteLine("=======RemoveClient======{0}", client.GetHashCode());
+            Console.WriteLine("===========RemoveClient{0}===========", id);
             bool flag = false;
-            if (connectClients.ContainsKey(client.GetHashCode()))
+            if (connectClients.ContainsKey(id))
             {
-                connectClients.Remove(client.GetHashCode());
+                connectClients.Remove(id);
                 flag = true;
             }
-            if (sendMessPool.ContainsKey(client.GetHashCode()))
+            if (pingList.ContainsKey(id))
             {
-                Queue<object> q = new Queue<object>();
-                sendMessPool.Remove(client.GetHashCode());
+                pingList.Remove(id);
             }
-            if (reciveMessPool.ContainsKey(client.GetHashCode()))
+            if (sendMessPool.ContainsKey(id))
             {
-                Queue<object> q = new Queue<object>();
-                reciveMessPool.Remove(client.GetHashCode());
+                sendMessPool.Remove(id);
+            }
+            if (reciveMessPool.ContainsKey(id))
+            {
+                reciveMessPool.Remove(id);
             }
             return flag;
         }
 
+        public bool HasSocket(int id)
+        {
+            return connectClients.ContainsKey(id);
+        }
+
         public Socket GetClientById(int id)
         {
-            return connectClients[id];
+            Socket socket = null;
+            if (connectClients.ContainsKey(id))
+            {
+                socket = connectClients[id];
+            }
+            return socket;
         }
 
         public void PutSendMessageInPool(int clientCode,object obj)
@@ -70,14 +95,8 @@ namespace CommonServer
             if (sendMessPool.ContainsKey(clientCode))
             {
                 q = sendMessPool[clientCode];
+                q.Enqueue(obj);
             }
-            else
-            {
-                q = new Queue<object>();
-                sendMessPool.Add(clientCode, q);
-            }
-            q.Enqueue(obj);
-           
         }
 
         public ServerClass HasSendMessages()
@@ -103,13 +122,8 @@ namespace CommonServer
             if (reciveMessPool.ContainsKey(clientCode))
             {
                 q = reciveMessPool[clientCode];
+                q.Enqueue(obj);
             }
-            else
-            {
-                q = new Queue<object>();
-                reciveMessPool.Add(clientCode, q);
-            }
-            q.Enqueue(obj);
         }
 
         public ServerClass HasReciveMessages()
@@ -127,6 +141,15 @@ namespace CommonServer
                 }
             }
             return ret;
+        }
+
+        public void ResetPing(int id)
+        {
+            Console.WriteLine("=====ResetPing{0}====", id);
+            if (pingList.ContainsKey(id))
+            {
+                pingList[id] = 0;
+            }
         }
     }
 

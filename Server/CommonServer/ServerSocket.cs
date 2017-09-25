@@ -91,6 +91,7 @@ namespace CommonServer
             {
                 try
                 {
+                    byte[] result = new byte[1024];
                     int receiveNumber = mClientSocket.Receive(result);
                     //Console.WriteLine("接收客户端{0},{1}消息， 长度为{2}", mClientSocket.RemoteEndPoint.ToString(), mClientSocket.GetHashCode(), receiveNumber);
                     //ByteBuffer buff = new ByteBuffer(result);
@@ -105,19 +106,21 @@ namespace CommonServer
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    ShutDownClient(mClientSocket);
                     break;
                 }
             }
         }
 
         //断开客户端连接
-        private void ShutDownClient(Socket mClientSocket)
+        public void Close(Socket mClientSocket)
         {
-            Console.WriteLine("客户端{0} ,{1}断开连接", mClientSocket.RemoteEndPoint.ToString(), mClientSocket.RemoteEndPoint.GetHashCode());
-            mClientSocket.Shutdown(SocketShutdown.Both);
-            mClientSocket.Close();
-            ServerManager.Instance.RemoveClient(mClientSocket);
+            Console.WriteLine("===========ShutDownClient===========");
+            if (ServerManager.Instance.HasSocket(mClientSocket.GetHashCode()))
+            {
+                Console.WriteLine("客户端{0} ,{1}断开连接", mClientSocket.RemoteEndPoint.ToString(), mClientSocket.RemoteEndPoint.GetHashCode());
+                mClientSocket.Close();
+                ServerManager.Instance.RemoveClient(mClientSocket);
+            }
         }
 
         //帧同步更新协议

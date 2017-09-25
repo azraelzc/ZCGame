@@ -15,6 +15,7 @@ namespace CommonClient
         private static ClientManager mInstance = null;
         private ClientSocket socket = null;
         private ClientMessagePool pool = null;
+        private int pingTime = 0;
         public static ClientManager Instance
         {
             get
@@ -54,8 +55,20 @@ namespace CommonClient
             pool.PutReciveMessageInPool(obj);
         }
 
-        public void Update()
+        public void SendPing(int delta)
         {
+            Console.WriteLine("========SendPing{0}=======", pingTime);
+            pingTime += delta;
+            if (pingTime >= PublicConstants.PING_INTERVAL_TIMEMS)
+            {
+                pingTime = 0;
+                B2C(new PingClass());
+            }
+        }
+
+        public void Update(int delta)
+        {
+            SendPing(delta);
             while (pool.HasSendMessage)
             {
                 object obj = pool.GetSendMessage();

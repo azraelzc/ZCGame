@@ -9,7 +9,7 @@ namespace CommonClient
 {
     public class ClientSocket
     {
-        private static byte[] result = new byte[1024];
+        
         private static Socket clientSocket = null;
         //是否已连接的标识  
         public bool IsConnected = false;
@@ -39,17 +39,13 @@ namespace CommonClient
                 IsConnected = false;
                 return;
             }
-            //服务器下发数据长度  
-            int receiveLength = clientSocket.Receive(result);
-            ByteBuffer buffer = new ByteBuffer(result);
-            int len = buffer.ReadShort();
-            string data = buffer.ReadString();
         }
 
         private void ReciveMessage()
         {
             while (true)
             {
+                byte[] result = new byte[1024];
                 int receiveLength = clientSocket.Receive(result);
                 //ByteBuffer buffer = new ByteBuffer(result);
                 //int len = buffer.ReadShort();

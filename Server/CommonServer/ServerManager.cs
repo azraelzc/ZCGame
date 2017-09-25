@@ -41,7 +41,12 @@ namespace CommonServer
 
         public bool RemoveClient(Socket client)
         {
-            return pool.RemoveClient(client);
+            return pool.RemoveClient(client.GetHashCode());
+        }
+
+        public bool HasSocket(int id)
+        {
+            return pool.HasSocket(id);
         }
 
         public void C2B(int clientCode,object obj)
@@ -54,8 +59,28 @@ namespace CommonServer
             pool.PutReciveMessageInPool(clientCode,obj);
         }
 
+        public void UpdatePingTime(int delta)
+        {
+            Dictionary<int, int> pingList = pool.GetPingList;
+            List<int> key = new List<int>(pingList.Keys);
+            for (int i = 0; i < key.Count; i++)
+            {
+                int time = pingList[key[i]];
+                time += delta;
+                if (time > PublicConstants.PING_LOST_TIMEMS)
+                {
+                    socket.Close(pool.GetClientById(key[i]));
+                }
+                else
+                {
+                    pingList[key[i]] = time;
+                }
+            }
+        }
+
         public void Update(int delta)
         {
+            UpdatePingTime(delta);
             while (true)
             {
                 ServerClass c = pool.HasSendMessages();
@@ -71,7 +96,7 @@ namespace CommonServer
                     { 
                         mSendEvent.Invoke(client, messages.Dequeue());
                     }
-                }           
+                }
             }
 
             while (true)
@@ -87,7 +112,15 @@ namespace CommonServer
                 {
                     while (messages.Count > 0)
                     {
-                        OnEvent(messages.Dequeue());
+                        object obj = messages.Dequeue();
+                        if (obj is PingClass)
+                        {
+                            pool.ResetPing(c.id);
+                        }
+                        else
+                        {
+                            OnEvent(obj);
+                        }  
                     }
                 }
             }
@@ -99,12 +132,10 @@ namespace CommonServer
             if (obj is Player)
             {
                 Player p = obj as Player;
-                Console.WriteLine("======OnEvent======{0}", p.ToString());
             }
             else if (obj is BuffEvent)
             {
                 BuffEvent buff = obj as BuffEvent;
-                Console.WriteLine("======OnEvent======{0}", buff.ToString());
             }
         }
     }

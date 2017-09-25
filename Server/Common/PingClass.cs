@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Common
 {
-    class SerializableConstants
+    [Serializable]
+    public class PingClass
     {
-        public const int AZRAEL_PLAYER = 0x20000;
+        
     }
 }

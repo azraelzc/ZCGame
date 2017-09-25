@@ -13,6 +13,6 @@ public class BattleRun : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ClientManager.Instance.Update();
+        ClientManager.Instance.Update((int)(Time.deltaTime * 1000));
     }
 }
