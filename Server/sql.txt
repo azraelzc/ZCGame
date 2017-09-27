@@ -1,0 +1,5 @@
+drop table test;
+create table test(
+	id int(10) unsigned NOT NULL AUTO_INCREMENT,
+	name varchar(10) NOT NULL DEFAULT '',
+);
