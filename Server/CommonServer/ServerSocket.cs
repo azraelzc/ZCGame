@@ -16,7 +16,7 @@ namespace CommonServer
         private static Socket serverSocket;
 
         private const int mUpdateInterval = 33;
-        public void init()
+        public void Init()
         {
             IPAddress ip = IPAddress.Parse(IpStr);
             IPEndPoint ipEndPoint = new IPEndPoint(ip, port);

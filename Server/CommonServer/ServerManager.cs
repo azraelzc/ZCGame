@@ -5,6 +5,7 @@ using System.Text;
 using Common;
 using System.Net.Sockets;
 using CommonUnit;
+using CommonDataBases;
 
 namespace CommonServer
 {
@@ -16,6 +17,7 @@ namespace CommonServer
         private static ServerManager mInstance = null;
         private ServerSocket socket = null;
         private ServerMessagePool pool = null;
+        private ConnectDB DB = null;
         public static ServerManager Instance
         {
             get
@@ -31,7 +33,8 @@ namespace CommonServer
         {
             pool = new ServerMessagePool();
             socket = new ServerSocket();
-            socket.init();
+            socket.Init();
+            DB.Init();
         }
 
         public bool AddClient(Socket client)
@@ -132,10 +135,12 @@ namespace CommonServer
             if (obj is Player)
             {
                 Player p = obj as Player;
+                DB.Insert("insert into * from test");
             }
             else if (obj is BuffEvent)
             {
                 BuffEvent buff = obj as BuffEvent;
+                DB.Query("select * from test");
             }
         }
     }

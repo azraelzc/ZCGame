@@ -67,9 +67,7 @@ namespace CommonClient
             }
             catch
             {
-                IsConnected = false;
-                clientSocket.Shutdown(SocketShutdown.Both);
-                clientSocket.Close();
+                Dispose();
             }
         }
 
@@ -98,7 +96,6 @@ namespace CommonClient
             if (clientSocket != null)
             {
                 IsConnected = false;
-                clientSocket.Shutdown(SocketShutdown.Both);
                 clientSocket.Close();
             }
         }

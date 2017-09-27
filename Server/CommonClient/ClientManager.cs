@@ -12,6 +12,10 @@ namespace CommonClient
         private ReciveEvent mReciveEvent;
         public event ReciveEvent OnReciveEvent{ add{mReciveEvent += value; } remove{mReciveEvent -= value; } }
 
+        public delegate void NetStateChange(CommonNet.NetState state);
+        private NetStateChange mNetStateChange;
+        public event NetStateChange OnNetStateChange { add { mNetStateChange += value; } remove { mNetStateChange -= value; } }
+
         private static ClientManager mInstance = null;
         private ClientSocket socket = null;
         private ClientMessagePool pool = null;

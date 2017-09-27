@@ -9,10 +9,16 @@ public class BattleRun : MonoBehaviour {
     // Use this for initialization
     void Start () {
         ClientManager.Instance.Init(IpStr, port);
+        ClientManager.Instance.OnReciveEvent += OnEvent;
     }
 	
 	// Update is called once per frame
 	void Update () {
         ClientManager.Instance.Update((int)(Time.deltaTime * 1000));
+    }
+
+    public void OnEvent(object obj)
+    {
+
     }
 }
