@@ -16,6 +16,8 @@ set aa=%aa%%bb%
 echo aa=%aa%
 
 FOR /F "delims=" %%i in (%SQLFile%) do (SET SQLStr=%SQLStr%%%i)
+::cd /d %DBPath%
+::mysql -u root -p%PWD% %DBName% --execute="create table test(id int);"
 echo %SQLStr%
 cd /d %DBPath%
 @pause
