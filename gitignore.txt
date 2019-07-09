@@ -1,7 +1,10 @@
 *.dll
 *.pdb
 obj
+.objs
 bin
+.vs
 Client/Library
 Client/Temp
-Client/.vs
+Client/Logs
+Client/Packages
