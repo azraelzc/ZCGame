@@ -310,6 +310,12 @@
     <Reference Include="FairyGUI.Editor">
       <HintPath>E:/project/ZCGame/Client/Assets/Editor/FairyGUI.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
     <Reference Include="FairyGUI">
       <HintPath>E:/project/ZCGame/Client/Assets/Plugins/FairyGUI.dll</HintPath>
     </Reference>
@@ -327,12 +333,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>E:/project/ZCGame/Client/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="CString">
-      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/CString.dll</HintPath>
-    </Reference>
-    <Reference Include="Debugger">
-      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/Debugger.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.9f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

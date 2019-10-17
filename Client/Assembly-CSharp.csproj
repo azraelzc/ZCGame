@@ -62,8 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scrips\LuaManager.cs" />
     <Compile Include="Assets\Scrips\Main.cs" />
+    <Compile Include="Assets\Scrips\Manager\LuaManager.cs" />
+    <Compile Include="Assets\Scrips\Manager\PoolManager.cs" />
+    <Compile Include="Assets\Scrips\Manager\ResourceManager.cs" />
+    <Compile Include="Assets\Scrips\Pool\ObjectPool.cs" />
+    <Compile Include="Assets\Scrips\Pool\UnitModelPool.cs" />
+    <Compile Include="Assets\Scrips\Util\AppConst.cs" />
+    <Compile Include="Assets\Scrips\Util\Util.cs" />
     <Compile Include="Assets\ToLua\Source\Generate\DelegateFactory.cs" />
     <Compile Include="Assets\ToLua\Source\Generate\FairyGUI_ContainerWrap.cs" />
     <Compile Include="Assets\ToLua\Source\Generate\FairyGUI_ControllerWrap.cs" />
@@ -423,6 +429,12 @@
     <Reference Include="nunit.framework">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.9f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
     <Reference Include="FairyGUI">
       <HintPath>E:/project/ZCGame/Client/Assets/Plugins/FairyGUI.dll</HintPath>
     </Reference>
@@ -434,12 +446,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>E:/project/ZCGame/Client/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="CString">
-      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/CString.dll</HintPath>
-    </Reference>
-    <Reference Include="Debugger">
-      <HintPath>E:/project/ZCGame/Client/Assets/Plugins/Debugger.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.9f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
