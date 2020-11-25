@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1920,1080">
+<component size="2532,1170">
   <displayList>
-    <graph id="n0_i8nh" name="n0" xy="159,138" size="471,248" type="rect"/>
+    <image id="n3_mcmf" name="n3" src="mcmf4" fileName="Images/onpiece.jpg" xy="0,0" size="2080,1170" aspect="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
   </displayList>
 </component>

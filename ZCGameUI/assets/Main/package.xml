@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<packageDescription id="otbpfi64" jpegQuality="80" compressPNG="true">
+<packageDescription id="otbpfi64">
   <resources>
-    <component id="i8nh0" name="UIMain.xml" path="/Components/"/>
+    <component id="i8nh0" name="UIMain.xml" path="/Components/" exported="true"/>
+    <image id="mcmf3" name="nvdi.jpg" path="/Images/"/>
+    <image id="mcmf4" name="onpiece.jpg" path="/Images/"/>
   </resources>
-  <publish name="Main" path="E:\project\ZCGame\Client\Assets\Resources\UI\Main"/>
+  <publish name="Main" path="E:\ZCProject\ZCGame\Client\Assets\ResourcesAB\UI\Main" packageCount="2"/>
 </packageDescription>
