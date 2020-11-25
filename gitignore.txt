@@ -8,3 +8,5 @@ Client/Library
 Client/Temp
 Client/Logs
 Client/Packages
+Client/*.csproj
+Client/*.sln
