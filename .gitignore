@@ -1,5 +1,7 @@
 *.dll
 *.pdb
+~$*
+__pycache__
 obj
 .objs
 bin
