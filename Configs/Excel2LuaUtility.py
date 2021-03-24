@@ -1,3 +1,4 @@
+
 def convertRow(row:list, types:list):
     newList = []
     if len(row) == len(types):

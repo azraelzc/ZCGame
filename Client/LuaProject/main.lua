@@ -23,6 +23,7 @@ end)
 
 declare("InitMgr", function()
     UIMgr.Init()
+    ConfigMgr.Init()
 end)
 
 declare("Start", function()

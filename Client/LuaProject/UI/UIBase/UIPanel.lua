@@ -10,23 +10,28 @@ function UIPanel:Close()
 	UIMgr.Close(self.UI)
 end
 
-function UIPanel:Create(UI,root,callback)
+function UIPanel:Create(UI,root,cb)
 	self.UI = UI
 	local p = UIManager.LoadUIPackage(UI.packageName)
 	print("==UIPackage=",p,UI.packageName,UI.componentName)
 	local ui = p:CreateObject(UI.componentName)
 	print("==ui==",root,ui)
 	root:AddChild(ui)
+	if cb then
+		cb()
+	end
 end
 
 function UIPanel:Init()
 	print("[UI Init]"..self.UI.name)
-	
+	self.panelChildren = {}
 end
 
 function UIPanel:PreEnter(cb)
 	print("[UI PreEnter]"..self.UI.name)
-	
+	if cb then
+		cb()
+	end
 end
 
 function UIPanel:Enter(param)
@@ -41,6 +46,9 @@ end
 
 function UIPanel:PreExit(cb)
 	print("[UI PreExit]"..self.UI.name)
+	if cb then
+		cb()
+	end
 end
 
 function UIPanel:Exit() 

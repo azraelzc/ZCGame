@@ -17,6 +17,7 @@ declare("UIManager", CS.ZCGame.Manager.UIManager)
 --lua global class
 declare("UIMgr", require("Manager.UIMgr"))
 declare("ResourceMgr", require("Manager.ResourceMgr"))
+declare("ConfigMgr", require("Manager.ConfigMgr"))
 declare("UIDefine", require("UI.UIDefine"))
 declare("UIPanel", require("UI.UIBase.UIPanel"))
 

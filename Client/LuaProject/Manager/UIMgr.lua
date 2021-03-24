@@ -76,17 +76,17 @@ end
 
 
 local function closeUIReady()
-    local panel = removeUI(UI)
-    if panel then
-        local cb = function ()
-            closeUIReady()
-        end
-        curUIStruct.closePanel = panel
-        panel:Unregister()
-        panel:PreExit(cb)
-    else
-        closeUIReady()
-    end
+    -- local panel = removeUI(UI)
+    -- if panel then
+    --     local cb = function ()
+    --         closeUIReady()
+    --     end
+    --     curUIStruct.closePanel = panel
+    --     panel:Unregister()
+    --     panel:PreExit(cb)
+    -- else
+    --     closeUIReady()
+    -- end
 end
 
 local function doClose(UI)

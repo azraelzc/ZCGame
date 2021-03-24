@@ -1,3 +1,4 @@
+
 import xlrd
 import Excel2LuaUtility
 import os
@@ -108,18 +109,18 @@ def write_file(file_name, file_data, path):
     print("write_file:" ,file_path)
     if isExists:
         os.remove(file_path)
-    file_writer = open(file_path, 'w')
+    file_writer = open(file_path, 'w', encoding='utf-8')
     file_writer.write(file_data)
     file_writer.close()
     return file_path
 
 def do_convert(input_path, output_path):
     file_map = iterator_files(input_path)
-    path_list = []
+    path_map = {}
     for name in file_map.keys():
         path = write_file(name, file_map[name], output_path)
-        path_list.append(path)
-    return path_list
+        path_map[name]=path
+    return path_map
 
 
 if __name__ == '__main__':

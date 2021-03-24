@@ -2,7 +2,7 @@ return {
 	[1] = {
 		id = 1,
 		name = {
-			CN = "°²ÄÈ",
+			CN = "å®‰å¨œ",
 			EN = "Anna",
 		},
 		age = 12,
@@ -11,11 +11,11 @@ return {
 		mp = 100,
 		skill = {
 			skill1 = {
-				name = "ÉñÂŞÌìÕ÷",
+				name = "ç¥ç½—å¤©å¾",
 				attact = 100.3,
 			},
 			skill2 = {
-				name = "¾ø¶Ô·ÀÓù",
+				name = "ç»å¯¹é˜²å¾¡",
 				attact = 10.5,
 				aaa = {
 					test1 = 111,
@@ -28,7 +28,7 @@ return {
 	[2] = {
 		id = 2,
 		name = {
-			CN = "À×Å·",
+			CN = "é›·æ¬§",
 			EN = "Leo",
 		},
 		age = 13,
@@ -37,7 +37,7 @@ return {
 		mp = 100,
 		skill = {
 			skill1 = {
-				name = "ÂİĞıÍè",
+				name = "èºæ—‹ä¸¸",
 				attact = 45.9,
 			},
 			skill2 = {
@@ -54,7 +54,7 @@ return {
 	[3] = {
 		id = 2,
 		name = {
-			CN = "äöÎĞÃùÈË",
+			CN = "æ¼©æ¶¡é¸£äºº",
 			EN = "Naruto",
 		},
 		age = 13,
@@ -63,7 +63,7 @@ return {
 		mp = 100,
 		skill = {
 			skill1 = {
-				name = "ÂİĞıÍè",
+				name = "èºæ—‹ä¸¸",
 				attact = 45.9,
 			},
 			skill2 = {

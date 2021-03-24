@@ -6,7 +6,8 @@ end
 
 function M:Init()
 	self.super.Init(self)
-
+    print("=Init==",table.tostring(ConfigMgr.GetConfigMap("MapConfig")))
+    print("=Init111==",table.tostring(ConfigMgr.GetConfigById("UserConfig",1)))
 end
 
 function M:Enter(param)
