@@ -17,6 +17,7 @@ function UIPanel:Create(UI,root,cb)
 	local ui = p:CreateObject(UI.componentName)
 	print("==ui==",root,ui)
 	root:AddChild(ui)
+	self.component = ui
 	if cb then
 		cb()
 	end
@@ -61,11 +62,11 @@ function UIPanel:Destroy()
 end
 
 function UIPanel:Show()
-	GOUtil.SetActive(self.prefab,true)
+	self.component.visible = true
 end
 
 function UIPanel:Hide()
-	GOUtil.SetActive(self.prefab,false)
+	self.component.visible = fals
 end
 
 function UIPanel:Register()

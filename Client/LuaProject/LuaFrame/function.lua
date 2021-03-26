@@ -88,7 +88,7 @@ function table.tostring(t, filterKeys, formatted)
         formatted = formatted == true or formatted == nil
         return table_tostring(t, {}, formatted and "\n" or "", formatted and 0 or nil,filterKeys)
     else
-        return t
+        return tostring(t)
     end
 end
 -- 清除table值
@@ -125,7 +125,7 @@ local function random_string(length)
     local s = ""
     for i =1, length do
         s = s .. alphaTable[math.random(#alphaTable)]
-    end;
+    end
     return s
 end
 declare("random_string", random_string)

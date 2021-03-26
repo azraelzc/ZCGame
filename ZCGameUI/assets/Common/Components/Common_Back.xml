@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="2532,1170">
+  <displayList>
+    <image id="n0_qfen" name="n0" src="qfen0" fileName="Images/common_icon_back.png" xy="30,30"/>
+    <image id="n1_qfen" name="n1" src="qfen1" fileName="Images/common_icon_wenhao.png" xy="200,45"/>
+  </displayList>
+</component>

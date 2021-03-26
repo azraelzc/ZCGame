@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="v7tf0183">
-  <resources/>
+  <resources>
+    <image id="qfen0" name="common_icon_back.png" path="/Images/" exported="true"/>
+    <image id="qfen1" name="common_icon_wenhao.png" path="/Images/" exported="true"/>
+    <component id="qfen2" name="Common_Back.xml" path="/Components/" exported="true"/>
+  </resources>
   <publish name="Common" path="E:\ZCProject\ZCGame\Client\Assets\ResourcesAB\UI\Common" packageCount="2"/>
 </packageDescription>

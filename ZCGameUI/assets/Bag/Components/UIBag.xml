@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="2532,1170">
+  <displayList>
+    <graph id="n0_qfen" name="bg" xy="7,8" size="2523,1170" type="rect" fillColor="#ff6699ff"/>
+    <component id="n2_qfen" name="n2" src="qfen2" fileName="Components/Common_Back.xml" pkg="v7tf0183" xy="0,0"/>
+    <text id="n1_qfen" name="n1" xy="1228,88" size="84,54" fontSize="40" text="背包"/>
+  </displayList>
+</component>
